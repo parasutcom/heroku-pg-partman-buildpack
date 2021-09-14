@@ -1,0 +1,18 @@
+#!/bin/bash -e
+
+# from https://stackoverflow.com/questions/61296083/using-pg-partman-with-rails-and-herokuci
+
+REPO_URL=${REPO_URL='https://github.com/pgpartman/pg_partman.git'}
+BUILD_DIR=${BUILD_DIR=/tmp}
+PG_CONFIG=${PG_CONFIG='/app/.indyno/vendor/postgresql/bin/pg_config'}
+
+if [ ! -f "$PG_CONFIG" ]; then
+  echo "Cannot find ${PG_CONFIG}"
+  exit 1;
+fi
+
+cd /tmp
+rm -rf pg_partman
+git clone ${REPO_URL}
+cd pg_partman
+make install PG_CONFIG=${PG_CONFIG} NO_BGW=1

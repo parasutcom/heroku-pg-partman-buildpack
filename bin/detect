@@ -1,0 +1,2 @@
+#!/bin/sh
+echo "pg_partman extension for postgres"
